@@ -41,7 +41,9 @@ test("JSON path blocks prototype access and untrusted syntax", () => {
   for(const path of ["safe","$.constructor","$.__proto__","$.prototype","$.safe()","$[foo]"])
     assert.throws(()=>getJsonPath(data,path));
   assert.throws(()=>getJsonPath(data,"$.missing"),/not found/);
-  assert.throws(()=>getJsonPath(data,"$"+".safe".repeat(40)),RangeError);
+  let nested={leaf:1};
+  for(let i=0;i<40;i++)nested={next:nested};
+  assert.throws(()=>getJsonPath(JSON.stringify(nested),"$"+".next".repeat(40)),RangeError);
 });
 
 test("CSV parses UTF-8 BOM, commas, CRLF and quoted multiline fields", () => {
