@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f7f6">
+  <meta name="description" content="Meridian — 免费、无账户、无需上传的离线开发者工具集：JSON、CSV、文本对比、编码、SHA-256、时间、颜色对比度、文本统计。">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Meridian · 独立开发者工具集</title>
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#workspace" data-key="skip">跳转到工具工作区</a>
+  <div class="shell">
+    <aside class="sidebar" aria-label="工具导航">
+      <a class="identity" href="#json" aria-label="Meridian 首页">
+        <span class="identity-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M20 3 37 20 20 37 3 20Z" stroke="currentColor" stroke-width="2"/><path d="m9 20 11-11 11 11-11 11Z" fill="currentColor" opacity=".14"/><path d="m20 9 11 11-11 11L9 20Z" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="20" r="3.3" fill="currentColor"/></svg></span>
+        <span class="identity-copy"><b>MERIDIAN</b><small>LOCAL DEV STUDIO</small></span>
+      </a>
+      <div class="sidebar-intro">
+        <span class="section-eyebrow">WORKSPACE / 01</span>
+        <p data-key="sideIntro">一个工作空间，完成日常开发中的精确操作。</p>
+      </div>
+      <nav id="toolNav" class="tool-nav" aria-label="选择工具">
+        <span class="nav-group" data-key="navStructure">结构与数据</span>
+        <a href="#json" data-open="json" aria-current="page"><span class="nav-symbol">{ }</span><span data-key="navJson">JSON 工作台</span><small>01</small></a>
+        <a href="#csv" data-open="csv"><span class="nav-symbol">≡</span><span data-key="navCsv">CSV 数据表</span><small>02</small></a>
+        <a href="#diff" data-open="diff"><span class="nav-symbol">≠</span><span data-key="navDiff">文本差异</span><small>03</small></a>
+        <span class="nav-group" data-key="navTransform">转换与验证</span>
+        <a href="#encoding" data-open="encoding"><span class="nav-symbol">↔</span><span data-key="navEncoding">编码转换</span><small>04</small></a>
+        <a href="#hash" data-open="hash"><span class="nav-symbol">#</span><span data-key="navHash">SHA-256 摘要</span><small>05</small></a>
+        <a href="#time" data-open="time"><span class="nav-symbol">◷</span><span data-key="navTime">时间转换</span><small>06</small></a>
+        <span class="nav-group" data-key="navExplore">内容与设计</span>
+        <a href="#color" data-open="color"><span class="nav-symbol">◐</span><span data-key="navColor">颜色对比度</span><small>07</small></a>
+        <a href="#text" data-open="text"><span class="nav-symbol">¶</span><span data-key="navText">文字整理</span><small>08</small></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="secure-dot" aria-hidden="true"></span>
+        <span><strong data-key="localOnly">所有计算均在本机运行</strong><small data-key="noUpload">无上传 · 无账号 · 无追踪</small></span>
+      </div>
+    </aside>
+    <div class="app-column">
+      <header class="topbar">
+        <div class="topbar-locator"><span class="eyebrow">WORKSPACE</span><span class="divider-slash">/</span><strong id="breadcrumb">JSON 工作台</strong></div>
+        <div class="topbar-controls">
+          <label class="tool-search"><span class="visually-hidden" data-key="findTool">搜索工具</span><span aria-hidden="true">⌕</span><input type="search" id="toolSearch" autocomplete="off" placeholder="查找工具 · Ctrl K"></label>
+          <button id="languageToggle" type="button" class="control-button" aria-label="切换界面语言" title="Language">中 / EN</button>
+          <button id="themeToggle" type="button" class="control-button" aria-label="切换明暗主题" title="Appearance">◐</button>
+          <a href="https://github.com/AincFh/meridian-toolkit" class="github-link" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </header>
+      <main id="workspace" class="workspace" tabindex="-1">
+        <section class="workspace-heading">
+          <div class="workspace-lead">
+            <span class="section-eyebrow" id="toolNumber">ENGINE / 01</span>
+            <h1 id="toolTitle">JSON 工作台<span class="accent">.</span></h1>
+            <p id="toolDescription">检查、格式化与精确定位 JSON 数据，不需要上传到任何服务。</p>
+          </div>
+          <div class="hero-signature" aria-hidden="true"><span>DESIGNED FOR</span><strong>CLARITY</strong><small>SECURE BY DEFAULT / V1.0</small></div>
+        </section>
+        <section class="workspace-actions" aria-label="当前工具操作">
+          <div class="action-left">
+            <button id="loadFile" type="button" class="btn subtle" data-key="loadFile">导入本地文件</button>
+            <input id="fileInput" type="file" accept=".json,.csv,.txt,.md,.log,text/plain,application/json,text/csv" hidden>
+            <button id="clearTool" type="button" class="btn subtle" data-key="clear">清空内容</button>
+          </div>
+          <div class="action-right">
+            <button id="copyOutput" type="button" class="btn subtle" data-key="copy">复制结果</button>
+            <button id="downloadOutput" type="button" class="btn subtle" data-key="download">导出结果</button>
+          </div>
+        </section>
+        <div id="status" class="tool-status" role="status" aria-live="polite">准备就绪</div>
+
+        <section class="tool-panel" data-panel="json" aria-label="JSON 工具">
+          <div class="panel-head"><div><span class="section-eyebrow">01 / STRUCTURED DATA</span><h2 data-key="jsonHeading">结构化数据校验</h2><p data-key="jsonHint">安全解析 JSON、紧凑化，或用简化路径读取嵌套字段。</p></div><span class="offline-mark">LOCAL ONLY</span></div>
+          <div class="editor-grid">
+            <div class="editor-pane"><label for="jsonInput" data-key="source">输入数据</label><textarea id="jsonInput" class="editor" spellcheck="false" placeholder='{"name": "Meridian", "active": true}'></textarea><div class="pane-foot"><span>JSON · UTF-8</span><span id="jsonBytes">0 B</span></div></div>
+            <div class="editor-pane"><label for="jsonOutput" data-key="result">处理结果</label><textarea id="jsonOutput" class="editor result-editor" spellcheck="false" readonly placeholder="—"></textarea><div class="pane-foot"><span>OUTPUT</span><span id="jsonMeta">—</span></div></div>
+          </div>
+          <div class="panel-controls"><button class="btn primary" data-command="json-format" data-key="jsonPretty">格式化 JSON</button><button class="btn" data-command="json-compact" data-key="jsonCompact">压缩</button><button class="btn" data-command="json-validate" data-key="validate">校验</button><label class="path-input"><span data-key="path">字段路径</span><input id="jsonPath" type="text" value="$.name" spellcheck="false" aria-label="JSON 字段路径"></label><button class="btn" data-command="json-path" data-key="extract">提取字段</button></div>
+        </section>
+
+        <section class="tool-panel" data-panel="csv" aria-label="CSV 工具" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">02 / TABULAR DATA</span><h2 data-key="csvHeading">CSV 表格读取与转换</h2><p data-key="csvHint">支持逗号、分号、制表符、BOM、引号与多行字段；本机预览、转换 JSON。</p></div><span class="offline-mark">LOCAL ONLY</span></div>
+          <div class="editor-grid"><div class="editor-pane"><label for="csvInput" data-key="source">输入数据</label><textarea id="csvInput" class="editor" spellcheck="false" placeholder="name,price&#10;Tea,12.50"></textarea><div class="pane-foot"><span>CSV / TSV</span><span id="csvBytes">0 B</span></div></div>
+          <div class="editor-pane"><label for="csvOutput" data-key="result">处理结果</label><textarea id="csvOutput" class="editor result-editor" readonly spellcheck="false" placeholder="—"></textarea><div class="pane-foot"><span>OUTPUT</span><span id="csvMeta">—</span></div></div></div>
+          <div class="panel-controls"><button class="btn primary" data-command="csv-preview" data-key="preview">预览表格</button><button class="btn" data-command="csv-json">CSV → JSON</button><button class="btn" data-command="csv-normalize" data-key="csvNormalize">规范化 CSV</button></div>
+          <div id="csvPreview" class="data-preview" aria-live="polite"></div>
+        </section>
+
+        <section class="tool-panel" data-panel="diff" aria-label="文本差异工具" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">03 / REVIEW</span><h2 data-key="diffHeading">逐行文本差异检查</h2><p data-key="diffHint">比较两份文本的插入、删除与未修改行；单侧最多 260 行，防止浏览器卡顿。</p></div><span class="offline-mark">LOCAL ONLY</span></div>
+          <div class="editor-grid"><div class="editor-pane"><label for="diffLeft" data-key="original">原始文本</label><textarea id="diffLeft" class="editor" spellcheck="false" placeholder="alpha&#10;bravo&#10;charlie"></textarea></div><div class="editor-pane"><label for="diffRight" data-key="revised">修改后文本</label><textarea id="diffRight" class="editor" spellcheck="false" placeholder="alpha&#10;delta&#10;charlie"></textarea></div></div>
+          <div class="panel-controls"><button class="btn primary" data-command="diff" data-key="compare">执行比较</button><span class="result-chip" id="diffMeta">—</span></div>
+          <div id="diffPreview" class="diff-preview" aria-live="polite"></div>
+        </section>
+
+        <section class="tool-panel" data-panel="encoding" aria-label="编码转换工具" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">04 / TRANSFORMS</span><h2 data-key="encodingHeading">文字与字节编码转换</h2><p data-key="encodingHint">UTF-8 Base64、URL 与 Hex 的双向转换，支持中文和 emoji。</p></div><span class="offline-mark">LOCAL ONLY</span></div>
+          <div class="panel-controls first-controls"><label class="path-input"><span data-key="encodingType">编码方式</span><select id="encodingFormat"><option value="base64">Base64 / UTF-8</option><option value="url">URL / Percent</option><option value="hex">Hex / UTF-8</option></select></label></div>
+          <div class="editor-grid"><div class="editor-pane"><label for="encodingInput" data-key="source">输入数据</label><textarea id="encodingInput" class="editor" spellcheck="false" placeholder="Hello，世界"></textarea></div><div class="editor-pane"><label for="encodingOutput" data-key="result">处理结果</label><textarea id="encodingOutput" class="editor result-editor" readonly spellcheck="false" placeholder="—"></textarea></div></div>
+          <div class="panel-controls"><button class="btn primary" data-command="encode" data-key="encode">编码</button><button class="btn" data-command="decode" data-key="decode">解码</button></div>
+        </section>
+
+        <section class="tool-panel" data-panel="hash" aria-label="SHA-256 摘要" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">05 / CRYPTOGRAPHY</span><h2 data-key="hashHeading">SHA-256 校验摘要</h2><p data-key="hashHint">使用浏览器 Web Crypto 原生 API 计算文本摘要；不会发送数据或保存输入。</p></div><span class="offline-mark">WEB CRYPTO</span></div>
+          <div class="editor-grid"><div class="editor-pane"><label for="hashInput" data-key="source">输入数据</label><textarea id="hashInput" class="editor" spellcheck="false" placeholder="The quick brown fox"></textarea></div><div class="editor-pane"><label for="hashOutput" data-key="result">处理结果</label><textarea id="hashOutput" class="editor result-editor" readonly spellcheck="false" placeholder="64 字符十六进制摘要"></textarea></div></div>
+          <div class="panel-controls"><button class="btn primary" data-command="hash" data-key="computeHash">计算 SHA-256</button><span class="result-chip" data-key="hashNote">安全上下文（HTTPS 或 localhost）可用</span></div>
+        </section>
+
+        <section class="tool-panel" data-panel="time" aria-label="时间格式转换" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">06 / TIME FORMAT</span><h2 data-key="timeHeading">Unix 时间与 ISO 格式</h2><p data-key="timeHint">秒、毫秒、ISO 8601 双向识别，显示 UTC 和本地时间。</p></div><span class="offline-mark">DEVICE CLOCK</span></div>
+          <label class="wide-field"><span data-key="timeInputLabel">时间文本</span><input id="timeInput" type="text" spellcheck="false" placeholder="2026-11-06T12:00:00Z 或 1793966400"></label>
+          <div class="panel-controls"><button class="btn primary" data-command="time" data-key="convert">转换时间</button><button class="btn" data-command="time-now" data-key="useNow">使用当前设备时间</button></div>
+          <div id="timePreview" class="metric-grid" aria-live="polite"></div><label class="result-label" for="timeOutput" data-key="result">处理结果</label><textarea id="timeOutput" class="editor result-editor short-editor" readonly spellcheck="false" placeholder="—"></textarea>
+        </section>
+
+        <section class="tool-panel" data-panel="color" aria-label="颜色对比度检查" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">07 / ACCESSIBILITY</span><h2 data-key="colorHeading">文字与背景色对比度</h2><p data-key="colorHint">计算 WCAG 对比度与 AA / AAA 可读性，不依赖截图和外部 API。</p></div><span class="offline-mark">WCAG</span></div>
+          <div class="color-inputs"><label><span data-key="foreground">文字颜色</span><div class="color-control"><input type="color" id="colorForeground" value="#164f46"><input type="text" id="colorForegroundText" value="#164f46" spellcheck="false" maxlength="7"></div></label><label><span data-key="background">背景颜色</span><div class="color-control"><input type="color" id="colorBackground" value="#ffffff"><input type="text" id="colorBackgroundText" value="#ffffff" spellcheck="false" maxlength="7"></div></label></div>
+          <div class="panel-controls"><button class="btn primary" data-command="color" data-key="checkContrast">检测对比度</button><button class="btn" data-command="color-swap" data-key="swapColors">交换颜色</button></div>
+          <div class="color-evidence"><div id="colorPreview" class="color-example"><strong>Clear text. Clear decisions.</strong><span data-key="colorExample">清晰优先，兼顾舒适阅读。</span></div><div id="colorStats" class="color-stats" aria-live="polite"></div></div>
+        </section>
+
+        <section class="tool-panel" data-panel="text" aria-label="文本整理与统计" hidden>
+          <div class="panel-head"><div><span class="section-eyebrow">08 / EDITORIAL</span><h2 data-key="textHeading">文字统计与清洗</h2><p data-key="textHint">统计中英文、字符、行和字节，自动清理行尾空格、重复行与多余空行。</p></div><span class="offline-mark">LOCAL ONLY</span></div>
+          <div class="editor-grid"><div class="editor-pane"><label for="textInput" data-key="source">输入数据</label><textarea id="textInput" class="editor" spellcheck="false" placeholder="在这里粘贴文字..."></textarea></div><div class="editor-pane"><label for="textOutput" data-key="result">处理结果</label><textarea id="textOutput" class="editor result-editor" readonly spellcheck="false" placeholder="—"></textarea></div></div>
+          <div class="panel-controls"><button class="btn primary" data-command="text-stats" data-key="analyze">分析文本</button><button class="btn" data-command="text-trim" data-key="trim">去除首尾空格</button><button class="btn" data-command="text-dedupe" data-key="dedupe">行去重</button><button class="btn" data-command="text-compact" data-key="compact">整理空行</button></div>
+          <div id="textStats" class="metric-grid" aria-live="polite"></div>
+        </section>
+        <footer class="workspace-footer"><span>MERIDIAN © 2026 / MIT LICENSE</span><span data-key="footer">输入数据只停留在当前浏览器页面 · 不自动保存 · 不发往网络</span></footer>
+      </main>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
